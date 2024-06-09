@@ -1,0 +1,109 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+[[patches]]
+[patches.module]
+source = 'nativefs.lua'
+before = 'main.lua'
+name = 'nativefs'
+
+[[patches]]
+[patches.copy]
+target = "main.lua"
+position = "append"
+sources = [
+	"trance.lua"
+]
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = 'self.SPEEDFACTOR = 1'
+position = "after"
+payload = 'Trance.set_globals(self)'
+match_indent = true
+
+# Plasma Deck
+[[patches]]
+[patches.pattern]
+target = "back.lua"
+pattern = 'ease_colour(G.C.UI_CHIPS, {0.8, 0.45, 0.85, 1})'
+position = "at"
+payload = 'ease_colour(G.C.UI_CHIPS, Trance.PLASMA)'
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "back.lua"
+pattern = 'ease_colour(G.C.UI_MULT, {0.8, 0.45, 0.85, 1})'
+position = "at"
+payload = 'ease_colour(G.C.UI_MULT, Trance.PLASMA)'
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "back.lua"
+pattern = 'ease_colour(G.C.UI_CHIPS, G.C.BLUE, 2)'
+position = "at"
+payload = 'ease_colour(G.C.UI_CHIPS, G.C.CHIPS, 2)'
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "back.lua"
+pattern = 'ease_colour(G.C.UI_MULT, G.C.RED, 2)'
+position = "at"
+payload = 'ease_colour(G.C.UI_MULT, G.C.MULT, 2)'
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "back.lua"
+pattern = 'G.C.UI_CHIPS[1], G.C.UI_CHIPS[2], G.C.UI_CHIPS[3], G.C.UI_CHIPS[4] = G.C.BLUE[1], G.C.BLUE[2], G.C.BLUE[3], G.C.BLUE[4]'
+position = "at"
+payload = 'G.C.UI_CHIPS = copy_table(G.C.CHIPS)'
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "back.lua"
+pattern = 'G.C.UI_MULT[1], G.C.UI_MULT[2], G.C.UI_MULT[3], G.C.UI_MULT[4] = G.C.RED[1], G.C.RED[2], G.C.RED[3], G.C.RED[4]'
+position = "at"
+payload = 'G.C.UI_MULT = copy_table(G.C.MULT)'
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = 'G.C.UI_CHIPS[1], G.C.UI_CHIPS[2], G.C.UI_CHIPS[3], G.C.UI_CHIPS[4] = G.C.BLUE[1], G.C.BLUE[2], G.C.BLUE[3], G.C.BLUE[4]'
+position = "at"
+payload = 'G.C.UI_CHIPS = copy_table(G.C.CHIPS)'
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = 'G.C.UI_MULT[1], G.C.UI_MULT[2], G.C.UI_MULT[3], G.C.UI_MULT[4] = G.C.RED[1], G.C.RED[2], G.C.RED[3], G.C.RED[4]'
+position = "at"
+payload = 'G.C.UI_MULT = copy_table(G.C.MULT)'
+match_indent = true
+
+# Splash Screen
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "{name = 'colour_1', ref_table = G.C, ref_value = 'RED'},"
+position = "at"
+payload = "{name = 'colour_1', ref_table = G.C.SPLASH, ref_value = 1},"
+match_indent = true
+
+# Splash Screen
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "{name = 'colour_2', ref_table = G.C, ref_value = 'BLUE'},"
+position = "at"
+payload = "{name = 'colour_2', ref_table = G.C.SPLASH, ref_value = 2},"
+match_indent = true
