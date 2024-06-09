@@ -72,43 +72,6 @@ G.FUNCS.options = function(e)
     G_FUNCS_options_ref(e)
     nativefs.write(lovely.mod_dir .. "/Trance/config.lua", STR_PACK(Trance_config))
 end
-local ct = create_tabs
-function create_tabs(args)
-    if args and args.tab_h == 7.05 then
-        local palette_idx = 0
-        for i = 1, #Trance_palettes do
-            if Trance_palettes[i] == Trance_config.palette then
-                palette_idx = i
-                break
-            end
-        end
-        args.tabs[#args.tabs + 1] = {
-            label = 'Trance',
-            tab_definition_function = (function()
-                return {
-                    n = G.UIT.ROOT,
-                    config = {
-                        align = "cm",
-                        padding = 0.05,
-                        colour = G.C.CLEAR
-                    },
-                    nodes = {
-                        create_option_cycle({
-                            label = "Selected Palette",
-                            scale = 0.8,
-                            w = 4,
-                            options = Trance_palettes,
-                            opt_callback = 'set_Trance_palette',
-                            current_option = palette_idx,
-                        }),
-                    },
-                }
-            end),
-            tab_definition_function_args = 'Trance'
-        }
-    end
-    return ct(args)
-end
 G.FUNCS.set_Trance_palette = function(x)
     Trance_config.palette = x.to_val
     
@@ -126,4 +89,78 @@ G.FUNCS.set_Trance_palette = function(x)
         end
     end
     Trance_set_globals(G, 1)
+end
+if not SpectralPack then
+    SpectralPack = {}
+    local ct = create_tabs
+    function create_tabs(args)
+        if args and args.tab_h == 7.05 then
+            args.tabs[#args.tabs+1] = {
+                label = "Spectral Pack",
+                tab_definition_function = function() return {
+                    n = G.UIT.ROOT,
+                    config = {
+                        emboss = 0.05,
+                        minh = 6,
+                        r = 0.1,
+                        minw = 10,
+                        align = "cm",
+                        padding = 0.2,
+                        colour = G.C.BLACK
+                    },
+                    nodes = SpectralPack
+                } end
+            }
+        end
+        return ct(args)
+    end
+end
+SpectralPack[#SpectralPack+1] = UIBox_button{ label = {"Trance"}, button = "tranceMenu", colour = G.C.BLUE, minw = 5, minh = 0.7, scale = 0.6}
+G.FUNCS.tranceMenu = function(e)
+    local tabs = create_tabs({
+        snap_to_nav = true,
+        tabs = {
+            {
+                label = "Trance",
+                chosen = true,
+                tab_definition_function = function()
+                    local palette_idx = 0
+                    for i = 1, #Trance_palettes do
+                        if Trance_palettes[i] == Trance_config.palette then
+                            palette_idx = i
+                            break
+                        end
+                    end
+                    return {
+                        n = G.UIT.ROOT,
+                        config = {
+                            emboss = 0.05,
+                            minh = 6,
+                            r = 0.1,
+                            minw = 10,
+                            align = "cm",
+                            padding = 0.2,
+                            colour = G.C.BLACK
+                        },
+                        nodes = {
+                            create_option_cycle({
+                                label = "Selected Palette",
+                                scale = 0.8,
+                                w = 4,
+                                options = Trance_palettes,
+                                opt_callback = 'set_Trance_palette',
+                                current_option = palette_idx,
+                            }),
+                        },
+                    }
+                end
+            },
+        }})
+    G.FUNCS.overlay_menu{
+            definition = create_UIBox_generic_options({
+                back_func = "options",
+                contents = {tabs}
+            }),
+        config = {offset = {x=0,y=10}}
+    }
 end
