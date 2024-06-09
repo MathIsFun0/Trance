@@ -22,7 +22,7 @@ sources = [
 target = "game.lua"
 pattern = 'self.SPEEDFACTOR = 1'
 position = "after"
-payload = 'Trance.set_globals(self)'
+payload = 'Trance_set_globals(self, 0);print(tprint(G.C.SPLASH))'
 match_indent = true
 
 # Plasma Deck
@@ -31,7 +31,7 @@ match_indent = true
 target = "back.lua"
 pattern = 'ease_colour(G.C.UI_CHIPS, {0.8, 0.45, 0.85, 1})'
 position = "at"
-payload = 'ease_colour(G.C.UI_CHIPS, Trance.PLASMA)'
+payload = 'ease_colour(G.C.UI_CHIPS, G.C.PLASMA or {0.8, 0.45, 0.85, 1})'
 match_indent = true
 
 [[patches]]
@@ -39,7 +39,7 @@ match_indent = true
 target = "back.lua"
 pattern = 'ease_colour(G.C.UI_MULT, {0.8, 0.45, 0.85, 1})'
 position = "at"
-payload = 'ease_colour(G.C.UI_MULT, Trance.PLASMA)'
+payload = 'ease_colour(G.C.UI_MULT, G.C.PLASMA or {0.8, 0.45, 0.85, 1})'
 match_indent = true
 
 [[patches]]

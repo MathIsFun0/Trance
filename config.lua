@@ -1,0 +1,1 @@
+return {["palette"]="Simple Blue",}

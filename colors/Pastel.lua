@@ -51,10 +51,6 @@ return {
         TEXT_LIGHT = HEX('FFFFFF'),
         TEXT_DARK = HEX('BAC8C9'),
         TEXT_INACTIVE = HEX('D5D5D7'),
-        BACKGROUND_LIGHT = HEX('DFECEC'),
-        BACKGROUND_WHITE = HEX('FFFFFF'),
-        BACKGROUND_DARK = HEX('B6D5D5'),
-        BACKGROUND_INACTIVE = HEX('CCCCCC'),
         OUTLINE_LIGHT = HEX('E5E5E5'),
         OUTLINE_LIGHT_TRANS = HEX('E5E5E599'),
         OUTLINE_DARK = HEX('B6D5D5'),
@@ -101,42 +97,5 @@ return {
         HEX('FFD6A8'), 
         HEX('FFA39D'),
         HEX('E0C8FF')
-    },
-    BACKGROUND = {
-        L = HEX('FFFFB3'),
-        D = HEX('AAB6B8'),
-        C = HEX('AAB6B8'),
-        contrast = 1
-    },
-    BOSSES = {
-        bl_ox = HEX('EBA973'),
-        bl_hook = HEX('D89676'),
-        bl_mouth = HEX('DEB3CD'),
-        bl_fish = HEX('99CFF7'),
-        bl_club = HEX('DFE6C8'),
-        bl_manacle = HEX('BABABA'),
-        bl_tooth = HEX('EB7E7E'),
-        bl_wall = HEX('D1A8D8'),
-        bl_house = HEX('A4D0E8'),
-        bl_mark = HEX('B88A93'),
-        bl_wheel = HEX('99F1B4'),
-        bl_arm = HEX('9F9AFF'),
-        bl_psychic = HEX('FDE7A8'),
-        bl_goad = HEX('EBA3C6'),
-        bl_water = HEX('E8F3F9'),
-        bl_eye = HEX('99B6F0'),
-        bl_plant = HEX('B0C5B8'),
-        bl_needle = HEX('A8B18B'),
-        bl_head = HEX('D5C3D9'),
-        bl_window = HEX('D0CDC1'),
-        bl_serpent = HEX('99D1A7'),
-        bl_pillar = HEX('BCA39A'),
-        bl_flint = HEX('F4A778'),
-
-        bl_final_bell = HEX('A3D4FF'),
-        bl_final_leaf = HEX('B0D3BC'),
-        bl_final_vessel = HEX('C0B8E9'),
-        bl_final_acorn = HEX('FFDAA5'),
-        bl_final_heart = HEX('EB6B6B')
     }
 }
