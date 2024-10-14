@@ -1,1 +1,0 @@
-return {["font"]="m6x11",["palette"]="Simple Blue",}

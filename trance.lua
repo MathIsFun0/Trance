@@ -7,9 +7,10 @@ function HEX(hex)
 
 local nativefs = require("nativefs")
 local lovely = require("lovely")
-Trance_config = {palette = "Base Game"}
-if nativefs.read(lovely.mod_dir .. "/Trance/config.lua") then
-    Trance_config = load(nativefs.read(lovely.mod_dir .. "/Trance/config.lua"))()
+Trance_config = {palette = "Base Game", font = "m6x11"}
+baladir = lovely.mod_dir:sub(1, #lovely.mod_dir-5)
+if nativefs.read(baladir .. "/config/Trance.lua") then
+    Trance_config = load(nativefs.read(baladir .. "/config/Trance.lua"))()
 end
 function is_color(v)
     return type(v) == 'table' and #v == 4 and type(v[1]) == "number" and type(v[2]) == "number" and type(v[3]) == "number" and type(v[4]) == "number"
@@ -91,7 +92,8 @@ end
 G_FUNCS_options_ref = G.FUNCS.options
 G.FUNCS.options = function(e)
     G_FUNCS_options_ref(e)
-    nativefs.write(lovely.mod_dir .. "/Trance/config.lua", STR_PACK(Trance_config))
+    if love.filesystem.getInfo(baladir .. "/config", "directory") == nil then love.filesystem.createDirectory(baladir .. "/config") end
+    nativefs.write(baladir .. "/config/Trance.lua", STR_PACK(Trance_config))
 end
 G.FUNCS.set_Trance_font = function(x)
     Trance_config.font = x.to_val
