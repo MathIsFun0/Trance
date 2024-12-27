@@ -29,11 +29,11 @@ for k, v in pairs(Trance_theme) do
         end
     end
 end
-local file = NFS.read(lovely.mod_dir .. "/Trance/fonts/"..(Trance_config.font or "m6x11")..".ttf")
+local file = nativefs.read(lovely.mod_dir .. "/Trance/fonts/"..(Trance_config.font or "m6x11")..".ttf")
 local gsl = Game.set_language
 function Game:set_language()
     gsl(self)
-    local file = NFS.read(lovely.mod_dir .. "/Trance/fonts/"..(Trance_config.font or "m6x11")..".ttf")
+    local file = nativefs.read(lovely.mod_dir .. "/Trance/fonts/"..(Trance_config.font or "m6x11")..".ttf")
     love.filesystem.write("temp-font.ttf", file)
     G.LANG.font.FONT = love.graphics.newFont("temp-font.ttf", G.TILESIZE * Trance_font.render_scale)
     for k, v in pairs(Trance_font) do
@@ -100,7 +100,7 @@ G.FUNCS.set_Trance_font = function(x)
     
     Trance_font = assert(load(nativefs.read(lovely.mod_dir .. "/Trance/fonts/"..(Trance_config.font or "m6x11")..".lua")))()
     
-    local file = NFS.read(lovely.mod_dir .. "/Trance/fonts/"..Trance_config.font..".ttf")
+    local file = nativefs.read(lovely.mod_dir .. "/Trance/fonts/"..Trance_config.font..".ttf")
     love.filesystem.write("temp-font.ttf", file)
     G.LANG.font.FONT = love.graphics.newFont("temp-font.ttf", G.TILESIZE * Trance_font.render_scale)
     for k, v in pairs(Trance_font) do
