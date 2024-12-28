@@ -15,9 +15,28 @@ end
 function is_color(v)
     return type(v) == 'table' and #v == 4 and type(v[1]) == "number" and type(v[2]) == "number" and type(v[3]) == "number" and type(v[4]) == "number"
 end
+function load_file_with_fallback(primary_path, fallback_path, reset_config)
+    local success, result = pcall(function() return assert(load(nativefs.read(primary_path)))() end)
+    if success then
+        return result
+    end
+    reset_config()
+    local fallback_success, fallback_result = pcall(function() return assert(load(nativefs.read(fallback_path)))() end)
+    if fallback_success then
+        return fallback_result
+    end
+end
 Trance = assert(load(nativefs.read(lovely.mod_dir .. "/Trance/colors/Base Game.lua")))()
-Trance_theme = assert(load(nativefs.read(lovely.mod_dir .. "/Trance/colors/"..(Trance_config.palette or "Base Game")..".lua")))()
-Trance_font = assert(load(nativefs.read(lovely.mod_dir .. "/Trance/fonts/"..(Trance_config.font or "m6x11")..".lua")))()
+Trance_theme = load_file_with_fallback(
+    lovely.mod_dir .. "/Trance/colors/" .. (Trance_config.palette or "Base Game") .. ".lua",
+    lovely.mod_dir .. "/Trance/colors/Base Game.lua",
+    function() Trance_config.palette = "Base Game" end
+)
+Trance_font = load_file_with_fallback(
+    lovely.mod_dir .. "/Trance/fonts/" .. (Trance_config.font or "m6x11") .. ".lua",
+    lovely.mod_dir .. "/Trance/fonts/m6x11.lua",
+    function() Trance_config.font = "m6x11" end
+)
 for k, v in pairs(Trance_theme) do
     if is_color(v) then 
         Trance[k] = v
